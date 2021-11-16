@@ -1,28 +1,44 @@
 package com.example.practice.view_models
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import com.example.practice.models.User
 import com.example.practice.repositories.UserDetailsRepository
-import com.example.practice.utility.Utils
+import com.example.practice.utility.Resource
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 
-class UserDetailsViewModel (application: Application) : AndroidViewModel(application) {
+class UserDetailsViewModel (private val userDetailsRepository: UserDetailsRepository) : ViewModel() {
 
-    private var mApplication: Application = application
-    private val mRepository = UserDetailsRepository(application.applicationContext)
-    private val _userList = MutableLiveData<List<User>>()
-    val userList: LiveData<List<User>> = _userList
+    private var userList = MutableLiveData<User>()
+//    val userList: LiveData<List<User>>
+//        get() = _userList
 
 
-    fun fetchUsersList() {
-        if (Utils.isNetworkConnected(mApplication.applicationContext)) {
-            _userList.value = mRepository.getUsersData()
 
-        } else {
-            //_onMessageError.value = true
-        }
+    fun fetchUsersList()  {
+       // if (Utils.isNetworkConnected(mApplication.applicationContext)) {
+          viewModelScope.launch {
+              userList.postValue(userDetailsRepository.executeGetUserData().data)
+          }
 
+//        viewModelScope.launch {
+//            userDetailsRepository.getUsersData()
+//        }
+
+//          }
+       // userList.value = userDetailsRepository.executeGetUserData().data.user
+           // val data = _userList.value
+
+//        } else {
+//            //_onMessageError.value = true
+//        }
+
+      //  return userList
+
+    }
+
+    fun getConsultations(): LiveData<User> {
+        return userList
     }
 }

@@ -20,9 +20,11 @@ object Utils {
             val n = cm.activeNetwork
             if (n != null) {
                 val nc = cm.getNetworkCapabilities(n)
-                return nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || nc.hasTransport(
-                    NetworkCapabilities.TRANSPORT_WIFI
-                )
+                if (nc != null) {
+                    return nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || nc.hasTransport(
+                        NetworkCapabilities.TRANSPORT_WIFI
+                    )
+                }
             }
         }
         return false

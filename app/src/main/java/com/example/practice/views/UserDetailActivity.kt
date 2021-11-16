@@ -2,32 +2,53 @@ package com.example.practice.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.practice.R
+import com.example.practice.databinding.ActivityUserDetailsBinding
 import com.example.practice.models.User
 import com.example.practice.view_models.UserDetailsViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserDetailActivity : AppCompatActivity() {
 
-    private lateinit var mViewModel: UserDetailsViewModel
+    private lateinit var  mBinding: ActivityUserDetailsBinding
+    private lateinit var mAdapter: UserListAdapter
+    private val mViewModel: UserDetailsViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_user_details)
+
         setViewModel()
+        setAdapter()
         setObserver()
 
     }
 
     private fun setViewModel() {
-        mViewModel = ViewModelProviders.of(this).get(UserDetailsViewModel::class.java)
+        mBinding.lifecycleOwner = this
+        mBinding.userDetailsVM = mViewModel
         mViewModel.fetchUsersList()
+    }
+
+    private fun setAdapter() {
+        mBinding.recyclerMain.layoutManager =
+            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        mAdapter = UserListAdapter(this, ArrayList(), mViewModel)
+        mBinding.myAdapter = mAdapter
+
     }
 
     private fun setObserver() {
 
-        mViewModel.userList.observe(this, Observer {
-            val data = it
-        // set adapter
+        mViewModel.getConsultations().observe(this, Observer {
+          val b =   it
+    //        mAdapter.setDataList(it)
+            val a =20
         })
 
     }

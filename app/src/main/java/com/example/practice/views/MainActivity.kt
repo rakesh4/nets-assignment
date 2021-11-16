@@ -21,19 +21,19 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getUsersData() {
-        RetrofitAPI.apiService.getUsers().enqueue(object : Callback<MutableList<User>> {
-            override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
-            }
-
-            override fun onResponse(
-                call: Call<MutableList<User>>,
-                response: Response<MutableList<User>>
-            ) {
-
-            }
-        })
-    }
+//    private fun getUsersData() {
+//        RetrofitAPI.apiService.getUsers().enqueue(object : Callback<MutableList<User>> {
+//            override fun onFailure(call: Call<MutableList<User>>, t: Throwable) {
+//            }
+//
+//            override fun onResponse(
+//                call: Call<MutableList<User>>,
+//                response: Response<MutableList<User>>
+//            ) {
+//
+//            }
+//        })
+//    }
 
 
 }

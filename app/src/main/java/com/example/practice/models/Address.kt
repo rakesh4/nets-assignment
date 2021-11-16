@@ -1,15 +1,17 @@
-
 package com.example.practice.models
 
+
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 data class Address(
-
     @SerializedName("city")
-    val city: String? = null,
-
-    @SerializedName("name")
-    val name: String? = null
-
-) : Serializable
+    val city: String,
+    @SerializedName("geo")
+    val geo: Geo,
+    @SerializedName("street")
+    val street: String,
+    @SerializedName("suite")
+    val suite: String,
+    @SerializedName("zipcode")
+    val zipcode: String
+)

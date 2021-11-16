@@ -1,5 +1,6 @@
-package com.example.practice.response
+package com.example.practice.models
 
+import com.example.practice.models.Address
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 

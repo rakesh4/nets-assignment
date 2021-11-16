@@ -1,10 +1,10 @@
-package com.example.practice.activities
+package com.example.practice.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practice.R
 import com.example.practice.api.RetrofitAPI
-import com.example.practice.response.User
+import com.example.practice.models.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

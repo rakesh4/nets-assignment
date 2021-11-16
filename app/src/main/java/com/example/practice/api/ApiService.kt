@@ -1,6 +1,6 @@
 package com.example.practice.api
 
-import com.example.practice.response.User
+import com.example.practice.models.User
 import retrofit2.Call
 import retrofit2.http.GET
 

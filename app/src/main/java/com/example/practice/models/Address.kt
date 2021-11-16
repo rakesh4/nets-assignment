@@ -1,5 +1,5 @@
 
-package com.example.practice.response
+package com.example.practice.models
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

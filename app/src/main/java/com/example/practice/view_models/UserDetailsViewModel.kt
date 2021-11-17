@@ -21,6 +21,7 @@ class UserDetailsViewModel(private val userDetailsRepository: UserDetailsReposit
 
     }
 
+    // get reversed user list
     fun setReversedOrderedData() {
         userData.value = userListResponse.value?.data?.reversed()
     }
@@ -29,6 +30,7 @@ class UserDetailsViewModel(private val userDetailsRepository: UserDetailsReposit
         return userListResponse
     }
 
+    // row clicked action
     fun onExcludeByIdClicked(item: UserDataItem) {
         val userList = userListResponse.value?.data?.reversed()
          userData.value = userList?.filter {

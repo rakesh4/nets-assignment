@@ -11,6 +11,10 @@ import com.example.practice.databinding.ActivityUserDetailsBinding
 import com.example.practice.view_models.UserDetailsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ *  class is used for show user list
+ */
+
 class UserDetailActivity : BaseActivity() {
 
     private lateinit var mBinding: ActivityUserDetailsBinding
@@ -36,7 +40,7 @@ class UserDetailActivity : BaseActivity() {
     private fun setAdapter() {
         mBinding.recyclerMain.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        mAdapter = UserListAdapter(this, ArrayList(), mViewModel)
+        mAdapter = UserListAdapter( ArrayList(), mViewModel)
         mBinding.myAdapter = mAdapter
 
     }

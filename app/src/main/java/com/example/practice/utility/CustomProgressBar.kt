@@ -21,7 +21,5 @@ class CustomProgressBar(context: Context) : Dialog(context) {
         setCancelable(false)
     }
 
-    override fun dismiss() {
-        super.dismiss()
-    }
+
 }

@@ -24,19 +24,17 @@ open class BaseRepository (private val localizeProvider: LocalizeTextProvider
                     Resource.success(body)
                 else
                     Resource.empty(response.message())
-            } else if (response.code() == HttpConstants.STATUS_CODE_UNAUTHORIZED_401) {
-                Resource.error<T>(parseAuthError(response.errorBody()))
-            } else if (response.code() == HttpConstants.STATUS_CODE_BAD_REQ_PARAM_400) {
-                Resource.error<T>(parseBadRequest(response.errorBody()))
+            }  else if (response.code() == HttpConstants.STATUS_CODE_BAD_REQ_PARAM_400) {
+                Resource.error(parseBadRequest(response.errorBody()))
             }
             else {
-                Resource.error<T>(parseAuthError(response.errorBody()))
+                Resource.error(parseAuthError(response.errorBody()))
             }
         } catch (e: Exception) {
             return if (e is NoInternetException)
-                Resource.noInternet<T>(localizeProvider.getNoInternetMessage())
+                Resource.noInternet(localizeProvider.getNoInternetMessage())
             else
-                Resource.error<T>(localizeProvider.getSomethingWrongMessage())
+                Resource.error(localizeProvider.getSomethingWrongMessage())
         }
     }
 

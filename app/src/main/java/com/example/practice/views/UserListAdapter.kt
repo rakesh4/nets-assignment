@@ -1,15 +1,13 @@
 package com.example.practice.views
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice.databinding.UserRowBinding
-import com.example.practice.models.User
 import com.example.practice.models.UserDataItem
 import com.example.practice.view_models.UserDetailsViewModel
 
-class UserListAdapter(context: Context, private var dataList: List<UserDataItem>,private val viewModel: UserDetailsViewModel) : RecyclerView.Adapter<UserListAdapter.ItemHolder>() {
+class UserListAdapter(private var dataList: List<UserDataItem>,private val viewModel: UserDetailsViewModel) : RecyclerView.Adapter<UserListAdapter.ItemHolder>() {
 
     private lateinit var binding: UserRowBinding
 

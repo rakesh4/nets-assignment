@@ -13,7 +13,7 @@
 
         <variable
             name="item"
-            type="com.example.practice.models.User" />
+            type="com.example.practice.models.UserDataItem" />
 
     </data>
 
@@ -37,14 +37,29 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textStyle="bold"
+                android:text="@{String.valueOf(item.id)}"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:text="@{item.name}"
+                app:layout_constraintStart_toEndOf="@+id/txt_user_id"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/txt_user_info1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:text="@{item.email}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_user_id" />
 
@@ -53,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:text="@{item.address.city}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_user_info1" />
 
@@ -61,6 +77,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:text="@{item.company.name}"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_user_address" />
 

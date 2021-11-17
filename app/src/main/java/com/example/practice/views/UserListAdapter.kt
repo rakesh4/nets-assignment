@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice.databinding.UserRowBinding
 import com.example.practice.models.User
+import com.example.practice.models.UserDataItem
 import com.example.practice.view_models.UserDetailsViewModel
 
-class UserListAdapter(context: Context, private var dataList: List<User>,private val viewModel: UserDetailsViewModel) : RecyclerView.Adapter<UserListAdapter.ItemHolder>() {
+class UserListAdapter(context: Context, private var dataList: List<UserDataItem>,private val viewModel: UserDetailsViewModel) : RecyclerView.Adapter<UserListAdapter.ItemHolder>() {
 
     private lateinit var binding: UserRowBinding
 
@@ -27,14 +28,14 @@ class UserListAdapter(context: Context, private var dataList: List<User>,private
         return dataList.size
     }
 
-    internal fun setDataList(list: List<User>) {
+    internal fun setDataList(list: ArrayList<UserDataItem>) {
         this.dataList = list
         notifyDataSetChanged()
     }
 
     inner class ItemHolder(private val binding: UserRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: User) {
+        fun bind(item: UserDataItem) {
             binding.item = item
         }
 

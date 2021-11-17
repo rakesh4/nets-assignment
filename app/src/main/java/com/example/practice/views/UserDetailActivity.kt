@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice.R
 import com.example.practice.databinding.ActivityUserDetailsBinding
-import com.example.practice.models.User
 import com.example.practice.view_models.UserDetailsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,9 +21,9 @@ class UserDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_user_details)
+        setAdapter()
 
         setViewModel()
-        setAdapter()
         setObserver()
 
     }
@@ -46,9 +45,12 @@ class UserDetailActivity : AppCompatActivity() {
     private fun setObserver() {
 
         mViewModel.getConsultations().observe(this, Observer {
-          val b =   it
-    //        mAdapter.setDataList(it)
-            val a =20
+            it.let {
+                mAdapter.setDataList(it)
+            }
+          //  var a = it
+
+
         })
 
     }

@@ -1,44 +1,42 @@
 package com.example.practice.view_models
 
-import android.app.Application
 import androidx.lifecycle.*
+import com.example.practice.api.Resource
 import com.example.practice.models.User
+import com.example.practice.models.UserDataItem
 import com.example.practice.repositories.UserDetailsRepository
-import com.example.practice.utility.Resource
 import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
 
-class UserDetailsViewModel (private val userDetailsRepository: UserDetailsRepository) : ViewModel() {
+class UserDetailsViewModel(private val userDetailsRepository: UserDetailsRepository) : ViewModel() {
 
-    private var userList = MutableLiveData<User>()
-//    val userList: LiveData<List<User>>
-//        get() = _userList
+    private var userListResponse = MutableLiveData<Resource<User>>()
+    private var userData = MutableLiveData<List<UserDataItem>>()
 
 
-
-    fun fetchUsersList()  {
-       // if (Utils.isNetworkConnected(mApplication.applicationContext)) {
-          viewModelScope.launch {
-              userList.postValue(userDetailsRepository.executeGetUserData().data)
-          }
-
-//        viewModelScope.launch {
-//            userDetailsRepository.getUsersData()
-//        }
-
-//          }
-       // userList.value = userDetailsRepository.executeGetUserData().data.user
-           // val data = _userList.value
-
-//        } else {
-//            //_onMessageError.value = true
-//        }
-
-      //  return userList
+    fun fetchUsersList() {
+        userListResponse.value = (Resource.loading(null))
+        viewModelScope.launch {
+            userListResponse.postValue(userDetailsRepository.executeGetUserData())
+        }
 
     }
 
-    fun getConsultations(): LiveData<User> {
-        return userList
+    fun setReversedOrderedData() {
+        userData.value = userListResponse.value?.data?.reversed()
+    }
+
+    fun getConsultations(): LiveData<Resource<User>> {
+        return userListResponse
+    }
+
+    fun onExcludeByIdClicked(item: UserDataItem) {
+        val userList = userListResponse.value?.data?.reversed()
+         userData.value = userList?.filter {
+            it.id != item.id
+        }
+    }
+
+    fun getUserData(): LiveData<List<UserDataItem>> {
+        return userData
     }
 }

@@ -5,7 +5,7 @@ import com.example.practice.api.HttpConstants
 import com.example.practice.utility.AppConstants
 import com.example.practice.utility.LocalizeTextProvider
 import com.example.practice.utility.NoInternetException
-import com.example.practice.utility.Resource
+import com.example.practice.api.Resource
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject

@@ -28,7 +28,7 @@ class UserListAdapter(context: Context, private var dataList: List<UserDataItem>
         return dataList.size
     }
 
-    internal fun setDataList(list: ArrayList<UserDataItem>) {
+    internal fun setDataList(list: List<UserDataItem>) {
         this.dataList = list
         notifyDataSetChanged()
     }

@@ -1,19 +1,19 @@
 package com.example.practice.views
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice.R
+import com.example.practice.api.Resource
 import com.example.practice.databinding.ActivityUserDetailsBinding
 import com.example.practice.view_models.UserDetailsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserDetailActivity : AppCompatActivity() {
+class UserDetailActivity : BaseActivity() {
 
-    private lateinit var  mBinding: ActivityUserDetailsBinding
+    private lateinit var mBinding: ActivityUserDetailsBinding
     private lateinit var mAdapter: UserListAdapter
     private val mViewModel: UserDetailsViewModel by viewModel()
 
@@ -21,9 +21,8 @@ class UserDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_user_details)
-        setAdapter()
-
         setViewModel()
+        setAdapter()
         setObserver()
 
     }
@@ -43,17 +42,32 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
+        mViewModel.getConsultations().observe(this, Observer { response ->
+            when (response.status) {
 
-        mViewModel.getConsultations().observe(this, Observer {
+                Resource.Status.LOADING -> showLoading()
+
+                Resource.Status.SUCCESS ->{
+                    hideLoading()
+                    mViewModel.setReversedOrderedData()
+                }
+
+                Resource.Status.ERROR -> {
+                    hideLoading()
+                    showToast(response.message.toString())
+                }
+                else -> {
+                    hideLoading()
+                    showToast(response.message.toString())
+                }
+            }
+        })
+
+        mViewModel.getUserData().observe(this, Observer
+        {
             it.let {
                 mAdapter.setDataList(it)
             }
-          //  var a = it
-
-
         })
-
     }
-
-
 }

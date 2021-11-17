@@ -4,8 +4,7 @@ import com.example.practice.api.ApiService
 import com.example.practice.api.RetrofitAPI
 import com.example.practice.models.User
 import com.example.practice.utility.LocalizeTextProvider
-import com.example.practice.utility.Resource
-import okhttp3.ResponseBody
+import com.example.practice.api.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

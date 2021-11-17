@@ -6,7 +6,7 @@ import com.example.practice.R
 /**
  * This class provide string messages
  */
-class LocalizeTextProvider(var context: Context) {
+class LocalizeTextProvider(private val context: Context) {
 
     fun getNoInternetMessage(): String {
         return context.getString(R.string.no_internet)
